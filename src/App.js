@@ -14,10 +14,10 @@ const formatToFormdata = (values) => {
     if(!isFileType(value)) {
       return formData.append(name, value)
     }
-    if(value.length <= 1) {
-      return formData.append(name, value[0] || '')
-    }
-    return formData.append(`${name}`, value || '')
+    Array.from({length: value.length}).forEach((_, index) => {
+      console.log('oi')
+      formData.append(`${name}`, value[index])
+    })
   })
   return formData
 }
@@ -29,7 +29,7 @@ const App = () => {
   const onSubmit = useCallback(async (values) => {
     try {
       const serializedData = formatToFormdata(values)
-      await axios.post('/lorem/ipsum', serializedData, { 'Content-Type': 'multipart/form-data' })
+      await axios.post('http://ee0dbf07cddb.ngrok.io/v1/teste', serializedData, { 'Content-Type': 'multipart/form-data' })
     } catch (e) {
       console.log(e)
     }
