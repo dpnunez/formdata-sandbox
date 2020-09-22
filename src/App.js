@@ -15,8 +15,7 @@ const formatToFormdata = (values) => {
       return formData.append(name, value)
     }
     Array.from({length: value.length}).forEach((_, index) => {
-      console.log('oi')
-      formData.append(`${name}`, value[index])
+      formData.append(name, value[index])
     })
   })
   return formData
